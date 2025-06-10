@@ -33,6 +33,7 @@ git clone https://github.com/AHNEUN-BYUL/2025.06-new-env-docker.git
 - 例: `2025.06-new-env-docker-0.0.1-SNAPSHOT.jar`
 
 ### 3️⃣ Dockerイメージ生成
+> ※ 本プロジェクトはDockerfileを含んでいますので、各自ローカルでDockerイメージをビルドしてください（イメージ共有はしていません）。
 ```bash
 docker build -t helloworld-demo .
 ```
