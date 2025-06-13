@@ -5,7 +5,7 @@ FROM amazoncorretto:21
 WORKDIR /app
 
 # JARファイルコピー
-COPY build/libs/2025.06-new-env-docker-0.0.1-SNAPSHOT.jar app.jar
+COPY backend/build/libs/2025.06-new-env-docker-0.0.1-SNAPSHOT.jar app.jar
 
 # アプリケーション実行
 ENTRYPOINT ["java", "-jar", "app.jar"]
