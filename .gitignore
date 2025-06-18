@@ -65,3 +65,7 @@ cypress/screenshots/
 
 # TypeScript
 *.tsbuildinfo
+
+# 環境変数（今回はテスト構築なのでコメントアウト。今後.gitignoreに追加必須）
+#.env
+#.env.*.local
