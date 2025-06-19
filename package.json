@@ -1,0 +1,31 @@
+{
+  "name": "2025.06-new-env-docker",
+  "version": "1.0.0",
+  "description": "Docker適用の新しい開発環境テスト構築中",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint",
+      "prettier --list-different"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AHNEUN-BYUL/2025.06-new-env-docker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AHNEUN-BYUL/2025.06-new-env-docker/issues"
+  },
+  "homepage": "https://github.com/AHNEUN-BYUL/2025.06-new-env-docker#readme",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2"
+  }
+}
