@@ -6,7 +6,7 @@
 
 <script setup>
 const name = "Test User"; // ← セミコロンが付いている (semi: false 違反)
-const greeting = "Hello, " + name + "!" // ← セミコロンなし、OK
+const greeting = "Hello, " + name + "!"; // ← セミコロンが付いている (semi: false 違反)
 </script>
 
 <style scoped>
