@@ -5,12 +5,12 @@
 </template>
 
 <script setup>
-const name = "Test User"; // ← セミコロンが付いている (semi: false 違反)
-const greeting = "Hello, " + name + "!" // ← セミコロンなし、OK
+  const name = 'Test User' // ← セミコロンが付いている (semi: false 違反)
+  const greeting = 'Hello, ' + name + '!' // ← セミコロンが付いている (semi: false 違反)
 </script>
 
 <style scoped>
-.test {
-  color: red;
-}
+  .test {
+    color: red;
+  }
 </style>
