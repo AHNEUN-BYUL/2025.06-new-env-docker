@@ -4,13 +4,11 @@
   "description": "Docker適用の新しい開発環境テスト構築中",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint",
-      "prettier --list-different"
+    "**/*.{js,ts,tsx,jsx,json,css,md}": [
+      "prettier --write"
     ]
   },
   "repository": {
@@ -26,6 +24,7 @@
   "homepage": "https://github.com/AHNEUN-BYUL/2025.06-new-env-docker#readme",
   "devDependencies": {
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.2"
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.5.3"
   }
 }
