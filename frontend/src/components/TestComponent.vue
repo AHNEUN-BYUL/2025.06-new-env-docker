@@ -1,12 +1,13 @@
 <template>
   <div class="test">
     <p>Prettier テスト</p>
+    <p>{{ greeting }}</p>
   </div>
 </template>
 
-<script setup>
-  const name = 'Test User' // ← セミコロンが付いている (semi: false 違反)
-  const greeting = 'Hello, ' + name + '!' // ← セミコロンが付いている (semi: false 違反)
+<script setup lang="ts">
+  const name = 'Test User';
+  const greeting = 'Hello, ' + name + '!';
 </script>
 
 <style scoped>
