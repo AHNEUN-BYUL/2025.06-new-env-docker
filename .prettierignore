@@ -4,4 +4,4 @@ build
 coverage
 *.java
 *.class
-backend/
+backend/**
