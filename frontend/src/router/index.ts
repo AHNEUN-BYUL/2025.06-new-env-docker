@@ -2,16 +2,17 @@
 /**
  * ? Vue Routerの設定ファイルです。
  */
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_URL), // .env環境変数から取得
-  routes: [ // ルートの定義
+  routes: [
+    // ルートの定義
     {
-      path: '/',              // ルートパス
-      name: 'home',           // 内部で使用するルート名
-      component: HomeView,    // ルートに対応するコンポーネント
+      path: '/', // ルートパス
+      name: 'home', // 内部で使用するルート名
+      component: HomeView, // ルートに対応するコンポーネント
     },
     {
       path: '/about',
@@ -24,6 +25,6 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
   ],
-})
+});
 
-export default router
+export default router;
