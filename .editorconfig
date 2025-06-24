@@ -1,0 +1,41 @@
+# Editor Configは、ファイル別のフォーマッティングプロパティを定義
+root = true
+
+# 基本属性定義
+[*]
+indent_style = space            # スペースインデント
+indent_size = 2                 # インデントサイズ: 2
+end_of_line = lf                # 改行文字: LF
+charset = utf-8                 # ファイルエンコーディング: UTF-8
+trim_trailing_whitespace = true # 行末の空白の除去
+insert_final_newline = true     # ファイルの最後の改行強制
+
+# よく使用するファイルタイプ
+[*.{js,jsx,ts,tsx,vue,css,scss,sass,less,styl}]
+indent_size = 2
+indent_style = space
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 100
+
+# Markdownファイルは最後の改行強制X
+[*.md]
+trim_trailing_whitespace = false
+insert_final_newline = false
+
+# JSONファイルは2間スペース
+[*.{json}]
+indent_style = space
+indent_size = 2
+
+# YAMLファイルも同一
+[*.yml]
+indent_style = space
+indent_size = 2
+
+# Javaファイルは4間スペースの例
+[*.java]
+indent_style = space
+indent_size = 4
