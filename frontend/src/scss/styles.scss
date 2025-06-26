@@ -1,0 +1,15 @@
+// bootstrap ロード
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
+// SCSS 作成
+body {
+  font-family: Arial, sans-serif;
+
+  .app-container {
+    padding: 20px;
+
+    h1 {
+      color: $primary; // bootstrap変数もそのまま可能
+    }
+  }
+}
