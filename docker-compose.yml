@@ -3,7 +3,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: app:0.0.1
     container_name: app
     ports:
       - '8080:8080'
@@ -26,3 +25,13 @@ services:
       - '5432:5432'
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+
+  localstack:
+    image: localstack/localstack
+    container_name: localstack
+    ports:
+      - '4566:4566'
+    environment:
+      - DEBUG=1 ## コンソールログを有効にする
+    volumes:
+      - './localstack-data:/var/lib/localstack'
