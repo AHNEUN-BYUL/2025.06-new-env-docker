@@ -33,5 +33,8 @@ services:
       - '4566:4566'
     environment:
       - DEBUG=1 ## コンソールログを有効にする
+      - SERVICES=lambda,apigateway ## 使用するサービスを指定
+      - LAMBDA_EXECUTOR=docker-reuse
     volumes:
       - './localstack-data:/var/lib/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
