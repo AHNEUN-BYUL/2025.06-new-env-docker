@@ -19,6 +19,10 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// AWS Lambda用
+	implementation 'com.amazonaws:aws-lambda-java-core:1.2.3'
+	implementation 'com.amazonaws:aws-lambda-java-events:3.11.3'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
@@ -29,4 +33,14 @@ springBoot {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// AWS Lambdaテスト用、jar + zipTree方式
+task lambdaZip(type: Zip) {
+	dependsOn jar
+	from {
+		zipTree(jar.archiveFile)
+	}
+	archiveFileName = 'lambda.zip'
+	destinationDirectory = file("$buildDir/distributions")
 }

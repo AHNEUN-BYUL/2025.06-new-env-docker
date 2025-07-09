@@ -2,17 +2,21 @@
 set -e
 
 echo "Lambdaコード圧縮完了状態で行ってください。"
-## powershell で実行する場合は、以下のコマンドを使用してください。
-## Compress-Archive -Path .\lambda_function.py -DestinationPath .\lambda_function.zip -Force
+# zip ファイルのパスを backend 以下に変更
+ZIP_PATH="./backend/build/distributions/lambda.zip"
+if [ ! -f "$ZIP_PATH" ]; then
+  echo "エラー: $ZIP_PATH が見つかりません。ビルドを実行してください。"
+  exit 1
+fi
 
 echo "Lambda関数の作成中..."
 aws lambda create-function \
   --endpoint-url http://localhost:4566 \
   --region us-east-1 \
   --function-name my-local-lambda \
-  --runtime python3.9 \
-  --handler lambda_function.handler \
-  --zip-file fileb://lambda_function.zip \
+  --runtime java21 \
+  --handler com.example.demo.LambdaHandler \
+  --zip-file fileb://$ZIP_PATH \
   --role arn:aws:iam::000000000000:role/lambda-role
 
 echo "REST APIの作成中..."
@@ -62,8 +66,8 @@ aws apigateway create-deployment \
 
 echo ""
 API_URL="http://localhost:4566/restapis/$REST_API_ID/local/_user_request_"
-echo "セットアップが完了しました！"
+echo "✅ セットアップが完了しました！"
 echo ""
 echo "curlを使ってLambdaをテスト中..."
-curl -X POST $API_URL -d '{"key":"value"}'
+curl -X POST "$API_URL" -d '{"key":"value"}'
 echo ""
