@@ -12,7 +12,7 @@ public class LambdaHandler implements RequestHandler<Map<String, Object>, Map<St
         context.getLogger().log("Received event: " + event);
         return Map.of(
             "statusCode", 200,
-            "body", "LocalStack Java Lambda からの再応答です！"
+            "body", "LocalStack Java Lambda からの応答です！"
         );
     }
 }
