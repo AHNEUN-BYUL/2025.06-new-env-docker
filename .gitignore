@@ -72,3 +72,4 @@ cypress/screenshots/
 
 # db volumes
 pgdata/
+localstack-data/
