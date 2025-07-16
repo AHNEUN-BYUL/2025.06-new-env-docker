@@ -1,4 +1,12 @@
-## 💡 準備事項
+# 🚀 環境構築ガイド
+
+このリポジトリは、**Java 21 + Spring Boot 3 + Docker**をベースとした、新環境構築内容をまとめたものです。
+
+---
+
+## 🔧 環境構築手順
+
+### ✅ 事前インストール
 
 - [Java 21 (Amazon Corretto)](https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html) インストール（Gradleビルドのため）
   - 例: `amazon-corretto-21.x.x-windows-x64.msi`
@@ -6,13 +14,17 @@
     > ※`Gradle Toolchain`をソース側に記載しましたので、今後自動認識してJava21にビルドします。
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) インストール及び実行
   - AMD64 ダウンロード
-- Gitインストール及び使用可能状態
-- vscodeの [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=vmware.vscode-boot-dev-pack) インストール
-- vscodeの [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) インストール
+  - WSL2有効
+- [Git](https://git-scm.com/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+  - 拡張（必須）: Spring Boot Extension Pack, Docker, STS plugin, Extension Pack for Java, EditorConfig for VS Code, Google Java Format for VS Code(Jose V Sebastian), Vue(Official), SonarQube for IDE, JBoss Toolkit, Runtime Server Protocol UI
+  - 拡張（選択）: Git Graph, GitHub Copilot, CSS Peek, Auto Close Tag, Auto Import, Auto Rename Tag, Better Comments, GitLens, TODO Highlight
+- [Node.js](https://nodejs.org/)（Husky & Lint-staged 実行のため）
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions)（Lambdaテスト環境用）
 
 ---
 
-## ⚙️ 実行方法
+## ⚙️ プロジェクトの実行手順
 
 安は下記の通りにプロジェクト生成しました。
 
@@ -60,12 +72,23 @@ docker run -p 8080:8080 helloworld-demo
   - `http://localhost:8080`
   - 結果：`Hello, World!`画面が表示されます🎉
 
-### 5️⃣ コンテナ終了
+## 🐳 Docker Compose 実行（複数サービス）
 
 ```bash
-docker ps  # 実行中のコンテナ確認
-docker stop <コンテナID及び名前>
+docker compose up -d
 ```
+
+停止：
+
+```bash
+docker compose stop
+```
+
+---
+
+## 🧪 Lambda テスト環境（LocalStack使用）
+
+このプロジェクトでは、LocalStack を使用してローカルで Lambda + API Gateway をテスト可能な環境を構築しています。
 
 ---
 
