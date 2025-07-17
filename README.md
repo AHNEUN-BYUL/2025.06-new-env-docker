@@ -90,7 +90,7 @@ npm install
 git clone https://github.com/AHNEUN-BYUL/2025.06-new-env-docker.git
 ```
 
-### 2️⃣ プロジェクトビルド（Gradle使用）
+### 2️⃣ プロジェクトビルド（Gradle Wrapper使用）
 
 まず、`backend` ディレクトリに移動してください:
 
