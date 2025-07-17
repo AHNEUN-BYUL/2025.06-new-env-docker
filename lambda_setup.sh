@@ -19,6 +19,12 @@ aws lambda create-function \
   --zip-file fileb://$ZIP_PATH \
   --role arn:aws:iam::000000000000:role/lambda-role
 
+echo "Lambda関数が Active になるまで待機中..."
+aws lambda wait function-active-v2 \
+  --endpoint-url http://localhost:4566 \
+  --region us-east-1 \
+  --function-name my-local-lambda
+
 echo "REST APIの作成中..."
 REST_API_ID=$(aws apigateway create-rest-api \
   --endpoint-url http://localhost:4566 \

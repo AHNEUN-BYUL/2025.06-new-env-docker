@@ -20,6 +20,12 @@ aws lambda update-function-code \
   --function-name my-local-lambda \
   --zip-file fileb://$ZIP_PATH
 
+echo "Lambda関数が更新され、Active になるまで待機中..."
+aws lambda wait function-updated-v2 \
+  --endpoint-url http://localhost:4566 \
+  --region us-east-1 \
+  --function-name my-local-lambda
+
 echo "Lambda関数のコードが正常に更新されました！"
 
 API_URL="http://localhost:4566/restapis/$REST_API_ID/local/_user_request_"
