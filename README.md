@@ -106,6 +106,9 @@ cd backend
 ./gradlew clean build
 ```
 
+- Gradle Wrapper (`gradlew`) を使用することで、ローカルに Gradle をインストールする必要はありません。
+- このコマンドを実行すると、プロジェクトに設定された Gradle バージョン (**8.14**) が自動的にダウンロードされ、使用されます。
+  > **注意**: Gradle 7.x のバージョンではこのプロジェクトは正しく動作しません。必ず Gradle Wrapper を使用してください。
 - ビルドが完了した次第 `build/libs` ディレクトリに `.jar` ファイルが生成されます。
 - 例: `2025.06-new-env-docker-0.0.1-SNAPSHOT.jar`
 
@@ -218,7 +221,7 @@ docker compose stop
 
 ## 🛠️ よくある問題と解決方法
 
-### 1️⃣ Node.js のインストールに失敗する場合
+### 1️⃣ Node.js の インストールに失敗する場合
 
 - 問題: `npm install` 実行時にエラーが発生する。
 - 解決方法:
