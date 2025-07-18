@@ -49,7 +49,7 @@
     - GitLens
     - TODO Highlight
 - [Node.js](https://nodejs.org/)
-  - バージョン：v22.16.0
+  - バージョン：v22.17.1（LTS）
   - フロントエンド依存関係のインストールやローカル開発サーバーの実行に必要です。
     - 例: Husky & Lint-staged など
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions)（Lambdaテスト環境用）
