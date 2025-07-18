@@ -11,21 +11,22 @@
 - [Java 21 (Amazon Corretto)](https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html) インストール（Gradleビルドのため）
   - 例: `amazon-corretto-21.x.x-windows-x64.msi`
   - インストール後、環境変数設定必要
-    > ※`Gradle Toolchain`をソース側に記載しましたので、今後自動認識してJava21にビルドします。
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) インストール及び実行
+    - 例: `C:\Program Files\Amazon Corretto\jdk21.x.x_x\bin`
+      > ※`Gradle Toolchain`をソース側に記載しましたので、今後自動認識してJava21にビルドします。
+- [Docker Desktop](https://www.docker.com/get-started/) インストール及び実行
   - 設定バージョン：
     - **Docker version 28.1.1**
     - **Docker Compose version v2.35.1-desktop.1**
       > Docker Desktopは Docker Compose v2 バージョンを基本的に含めています。
   - AMD64 ダウンロード
   - WSL2有効（インストール中に WSL2 を有効にするオプションを選択します。）
+    - オプション: ✓ Use WSL 2 instead of Hyper-V (recommended)
 - [Git](https://git-scm.com/)
   - バージョン：git version 2.49.0.windows.1
 - [Visual Studio Code](https://code.visualstudio.com/)
   - **拡張（必須）**:
     - Spring Boot Extension Pack
     - Docker
-    - STS plugin
     - Extension Pack for Java
     - EditorConfig for VS Code
       - `.editorconfig` ファイルは、コードフォーマットのルールを定義しています。
@@ -54,22 +55,6 @@
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions)（Lambdaテスト環境用）
   - バージョン：aws-cli/2.27.47 Python/3.13.4 Windows/11 exe/AMD64
   - Lambda テスト環境をローカルで構築するために必要です。
-
----
-
-## Git Hook 構成 (Husky + lint-staged)
-
-このプロジェクトはコミットの時、自動的にPrettier及びESLintを実行します。
-プロジェクトのルートディレクトリで以下のコマンドを実行してください:
-
-```bash
-npm install
-```
-
-- このコマンドにより、`husky` と `lint-staged` がインストールされます。
-- `husky` は Git Hook を設定し、コミット時に自動的にコードスタイルを検査します。
-- `lint-staged` はステージングされたファイルに対してのみコードフォーマットを適用します。
-- `husky` のインストール後、Git Hook が自動的に設定されます。
 
 ---
 
@@ -122,7 +107,23 @@ cd backend
 
 - Lambda テストに必要な形式の zip ファイルが `backend/build/distributions` に生成されます。
 
-### 4️⃣ フロントエンド依存関係インストール（Vue.js）
+### 4️⃣ Git Hook 構成 (Husky + lint-staged)
+
+このプロジェクトはコミットの時、自動的にPrettier及びESLintを実行します。
+プロジェクトのルートディレクトリで以下のコマンドを実行してください:
+
+```bash
+npm install
+```
+
+- このコマンドにより、`husky` と `lint-staged` がインストールされます。
+- `husky` は Git Hook を設定し、コミット時に自動的にコードスタイルを検査します。
+- `lint-staged` はステージングされたファイルに対してのみコードフォーマットを適用します。
+- `husky` のインストール後、Git Hook が自動的に設定されます。
+
+---
+
+### 5️⃣ フロントエンド依存関係インストール（Vue.js）
 
 `frontend` ディレクトリに移動してください:
 
@@ -139,7 +140,7 @@ npm install
 - Vue.js を含むフロントエンド依存関係がインストールされます。
 - インストール後、フロントエンドの開発を開始できます。
 
-### 5️⃣ フロントエンド開発サーバー起動
+### 6️⃣ フロントエンド開発サーバー起動
 
 ```bash
 npm run dev
@@ -225,10 +226,23 @@ docker compose stop
 
 - 問題: `npm install` 実行時にエラーが発生する。
 - 解決方法:
-  - Node.js のバージョンを確認してください。推奨バージョンは `v22.16.0` です。
+  - Node.js のバージョンを確認してください。推奨バージョンは `v22.17.1` です。
   - Node.js を再インストールしてください。[公式サイト](https://nodejs.org/)から最新バージョンをダウンロードできます。
 
-### 2️⃣ Docker Compose 実行時にエラーが発生する場合
+### 2️⃣ PowerShellで .ps1 ファイルが実行できないエラー
+
+- 問題: `npm` 実行時に次のようなエラーが出ることがあります。
+  ```perl
+  このシステムではスクリプトの実行が無効になっているため、xxx.ps1 を読み込むことができません。
+  ```
+- 解決方法:
+  - これは PowerShell の実行ポリシーが厳しく設定されているためです。
+  - 以下のコマンドを実行して、実行ポリシーを緩和してください。
+  ```powershell
+  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+  ```
+
+### 3️⃣ Docker Compose 実行時にエラーが発生する場合
 
 - 問題: `docker compose up -d` 実行時にサービスが起動しない。
 - 解決方法:
@@ -236,14 +250,35 @@ docker compose stop
   - `docker --version` を実行して Docker が正しくインストールされているか確認してください。
   - `docker compose logs` を使用してエラーの詳細を確認してください。
 
-### 3️⃣ フロントエンド開発サーバーが起動しない場合
+### 4️⃣ LocalStack のイメージ取得エラー
+
+- 問題: `docker compose up -d` を実行した際に、以下のようなエラーが発生する場合があります。
+
+```bash
+failed to copy: httpReadSeeker: failed open: failed to do request: Get ...
+lookup docker-images-prod.***.cloudflarestorage.com: no such host
+```
+
+> これは `LocalStack` イメージのダウンロード中に発生するネットワークエラーで、DNS 解決やプロキシの設定が原因となることがあります。
+
+- 解決方法:
+  - 以下のコマンドで `LocalStack` イメージを先に手動で取得してください。
+  ```bash
+  docker pull localstack/localstack
+  ```
+  - その後、再度 `docker compose up -d` を実行します。
+  ```bash
+  docker compose up -d
+  ```
+
+### 5️⃣ フロントエンド開発サーバーが起動しない場合
 
 - 問題: `npm run dev` 実行後にブラウザでアクセスできない。
 - 解決方法:
   - `frontend` ディレクトリで `npm install` を再度実行してください。
   - ポート `5173` が他のプロセスで使用されていないことを確認してください。
 
-### 4️⃣ ボリューム関連のパーミッションエラーが発生する場合（特に Windows + WSL2 環境）
+### 6️⃣ ボリューム関連のパーミッションエラーが発生する場合（特に Windows + WSL2 環境）
 
 - 問題: `docker compose up -d` 実行時、PostgreSQL や LocalStack などのサービスが `permission denied` エラーで起動しない。
 - 解決方法:
@@ -259,7 +294,7 @@ docker compose stop
   docker compose up -d
   ```
 
-### 5️⃣ ポート競合でコンテナが起動しない場合
+### 7️⃣ ポート競合でコンテナが起動しない場合
 
 - 問題: `docker compose up -d` 実行後、`localhost:8080` や `localhost:5432` にアクセスできない、または既存のアプリが動作を阻害している。
 - 解決方法:
@@ -270,3 +305,26 @@ docker compose stop
   ```
   - 競合しているプロセスを停止するか、docker-compose.yml の該当ポートを別のポートに変更して再度起動してください。
   - 例: `8080:8080` を `8081:8080` に変更 → `http://localhost:8081` にアクセス
+
+### 8️⃣ Git Bash で ./lambda_setup.sh 実行時のエラー対処法
+
+- 問題: `./lambda_setup.sh` を Git Bash で実行すると、以下のようなエラーが発生する場合があります。
+
+```bash
+Unable to locate credentials. You can configure credentials by running "aws configure".
+```
+
+- 解決方法:
+  - AWS CLI に認証情報（クレデンシャル）が設定されていないためです。
+  - ただし、LocalStack を使用する場合は実際の認証は行われないため、ダミーの値でも問題ありません。
+  - ①ターミナルで以下のコマンドを実行します。
+  ```bash
+  aws configure
+  ```
+  - ②以下のようにすべて test や適当な値を入力してください。
+  ```pgsql
+  AWS Access Key ID [None]: test
+  AWS Secret Access Key [None]: test
+  Default region name [None]: us-east-1
+  Default output format [None]: json
+  ```
