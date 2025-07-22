@@ -26,7 +26,7 @@
 - [Visual Studio Code](https://code.visualstudio.com/)
   - **拡張（必須）**:
     - Spring Boot Extension Pack
-    - Docker
+    - [Docker Extension Pack for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
     - Extension Pack for Java
     - EditorConfig for VS Code
       - `.editorconfig` ファイルは、コードフォーマットのルールを定義しています。
